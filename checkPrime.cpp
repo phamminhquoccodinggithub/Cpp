@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+int checkPrime(int n)
+{
+	int count = 0;
+	if (n < 3)
+		return 0;
+	for (int i = 2; i <= n / 2; i++)
+	{
+		if (n % i == 0)
+		{
+			count++;
+		}
+	}
+	if (count == 0)
+		return 1;
+	return 0;
+}
+
+int inputNumber(int n)
+{
+	cout << "Enter a number: \n";
+	cin >> n;
+	return n;
+}
+int main()
+{
+	int n = inputNumber(n);
+	int i = checkPrime(n);
+	if (i == 1)
+		cout << n << " is a prime number\n";
+	else
+		cout << n << " is not a prime number\n";
+	return 1;
+}
