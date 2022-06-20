@@ -4,15 +4,16 @@ using namespace std;
 
 /* A binary tree node has data, pointer to left child
 and a pointer to right child */
-struct Node {
+struct Node
+{
 	int data;
 	struct Node *left, *right;
 };
 
-//Utility function to create a new tree node
-Node* newNode(int data)
+// Utility function to create a new tree node
+Node *newNode(int data)
 {
-	Node* temp = new Node;
+	Node *temp = new Node;
 	temp->data = data;
 	temp->left = temp->right = NULL;
 	return temp;
@@ -20,7 +21,7 @@ Node* newNode(int data)
 
 /* Given a binary tree, print its nodes according to the
 "bottom-up" postorder traversal. */
-void printPostorder(struct Node* node)
+void printPostorder(struct Node *node)
 {
 	if (node == NULL)
 		return;
@@ -36,7 +37,7 @@ void printPostorder(struct Node* node)
 }
 
 /* Given a binary tree, print its nodes in inorder*/
-void printInorder(struct Node* node)
+void printInorder(struct Node *node)
 {
 	if (node == NULL)
 		return;
@@ -52,7 +53,7 @@ void printInorder(struct Node* node)
 }
 
 /* Given a binary tree, print its nodes in preorder*/
-void printPreorder(struct Node* node)
+void printPreorder(struct Node *node)
 {
 	if (node == NULL)
 		return;
@@ -67,10 +68,16 @@ void printPreorder(struct Node* node)
 	printPreorder(node->right);
 }
 
-/* Driver program to test above functions*/
+void swap(struct Node *node)
+{
+	Node *temp = new Node;
+	temp = node->left;
+	node->left = node->right;
+	node->right = temp;
+}
 int main()
 {
-	struct Node* root = newNode(1);
+	struct Node *root = newNode(1);
 	root->left = newNode(2);
 	root->right = newNode(3);
 	root->left->left = newNode(4);
@@ -84,6 +91,17 @@ int main()
 
 	cout << "\nPostorder traversal of binary tree is \n";
 	printPostorder(root);
+	cout << endl;
 
+	swap(root);
+	cout << "After swap";
+	cout << "\nPreorder traversal of binary tree is \n";
+	printPreorder(root);
+
+	cout << "\nInorder traversal of binary tree is \n";
+	printInorder(root);
+
+	cout << "\nPostorder traversal of binary tree is \n";
+	printPostorder(root);
 	return 0;
 }
