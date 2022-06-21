@@ -1,13 +1,13 @@
 #include <iostream>
 #include "DoublyNode.h"
-#include "DoublyLinkedList.h"
+#include "List.h"
 
 using namespace std;
 
 int main()
 {
     // NULL
-    DoublyLinkedList<int> linkedList = DoublyLinkedList<int>();
+    List<int> linkedList = List<int>();
 
     // it will be printed backwardly
     // 43->NULL

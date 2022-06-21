@@ -166,17 +166,69 @@ void reverse(Node **headRef)
         *headRef = temp->prev;
     }
 }
+void sortedInsert(Node **headRef, Node *newNode)
+{
+    Node *cur;
+    if (*headRef == NULL)
+    {
+        *headRef = newNode;
+    }
+    else if ((*headRef)->data >= newNode->data)
+    {
+        newNode->next = *headRef;
+        newNode->next->prev = newNode;
+        *headRef = newNode;
+    }
+    else
+    {
+        cur = *headRef;
+        while (cur->next != NULL && cur->next->data < newNode->data)
+        {
+            cur = cur->next;
+        }
+        newNode->next = cur->next;
+        if (cur->next != NULL)
+        {
+            newNode->next->prev = newNode;
+        }
+        cur->next = newNode;
+        newNode->prev = cur;
+    }
+}
+void insertionSort(Node **headRef)
+{
+    Node *sorted = NULL;
+    Node *cur = *headRef;
+    while (cur != NULL)
+    {
+        Node *next = cur->next;
+        cur->prev = cur->next = NULL;
+        sortedInsert(&sorted, cur);
+        cur = next;
+    }
+    *headRef = sorted;
+}
+void linearSort(Node **headRef)
+{
+    Node *cur = *headRef;
+    while (cur != NULL)
+    {
+        cur = cur->next;
+    }
+}
 int main()
 {
     Node *n;
     push(&n, 5);
     push(&n, 4);
     push(&n, 3);
-    push(&n, 1);
+    push(&n, 7);
     // insertAfter(n->next, 7);
     append(&n, 10);
     // insertBefore(n,7);
     printList(n);
+    //insertionSort(&n);
+    linearSort(&n);
     printListReverse(n);
     // cout << endl;
     //  deleteNode(&n, n);
