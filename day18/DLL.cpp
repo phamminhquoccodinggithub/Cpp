@@ -208,19 +208,23 @@ void insertionSort(Node **headRef)
     }
     *headRef = sorted;
 }
-void linearSort(Node **headRef)
-{
-    Node *cur = *headRef;
-    while (cur != NULL)
-    {
-        cur = cur->next;
-    }
-}
 void swapDataNode(Node *first, Node *second)
 {
     int temp = first->data;
     first->data = second->data;
     second->data = temp;
+}
+void linearSort(Node **headRef)
+{
+    Node *cur = *headRef;
+    while (cur->next != NULL)
+    {
+        if (cur->data>cur->next->data)
+        {
+            swapDataNode(cur, cur->next);
+        }        
+        cur = cur->next;
+    }
 }
 void bubbleSort(Node *start)
 {
@@ -249,6 +253,26 @@ void bubbleSort(Node *start)
         lptr = ptr1;
     } while (swapped);
 }
+void removeDup(Node *head)
+{
+    Node *cur = head;
+    Node *next;
+    if (cur == NULL)
+    {
+        return;
+    }
+    while (cur->next != NULL)
+    {
+        if (cur->data == cur->next->data)
+        {
+            next = cur->next->next;
+            free(cur->next);
+            cur->next = next;
+        }
+        else
+            cur = cur->next;
+    }
+}
 int main()
 {
     Node *n;
@@ -258,17 +282,23 @@ int main()
     push(&n, 7);
     // insertAfter(n->next, 7);
     append(&n, 10);
+    push(&n, 3);
+    push(&n, 4);
+    push(&n, 4);
     // insertBefore(n,7);
-    printList(n);
+    // printList(n);
     // insertionSort(&n);
     // linearSort(&n);
     bubbleSort(n);
-    printListReverse(n);
-    // cout << endl;
-    //  deleteNode(&n, n);
-    //  printList(n);
-    //  reverse(&n);
-    //  cout<<endl;
-    //  printList(n);
+    printList(n);
+    removeDup(n);
+    printList(n);
+    // printListReverse(n);
+    //  cout << endl;
+    //   deleteNode(&n, n);
+    //   printList(n);
+    //   reverse(&n);
+    //   cout<<endl;
+    //   printList(n);
     return 0;
 }
