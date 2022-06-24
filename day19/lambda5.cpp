@@ -1,22 +1,19 @@
-#include <string>
-
-class MessageSizeStore
+class Foo
 {
-    public:
-    MessageSizeStore () : _max_size( 0 ) {}
-    void checkMessage (const std::string& message ) 
+public:
+    Foo () : _x( 3 ) {}
+    void func ()
     {
-        const int size = message.length();
-        if ( size > _max_size )
-        {
-            _max_size = size;
-        }
-    }
-    int getSize ()
-    {
-        return _max_size;
+        // a very silly, but illustrative way of printing out the value of _x
+        [this] () { cout << _x; } ();
     }
 
 private:
-    int _max_size;
+        int _x;
 };
+
+int main()
+{
+    Foo f;
+    f.func();
+}
