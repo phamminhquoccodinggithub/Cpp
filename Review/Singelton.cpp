@@ -8,7 +8,7 @@ enum vehicletype {
 class vehicle {
 public:
 	virtual void printvehicle() = 0;
-	static vehicle* create(VehicleType type);
+	static vehicle* create(vehicletype type);
 	virtual ~vehicle(){}
 };
 class Twowheeler : public vehicle {
@@ -33,7 +33,7 @@ class Fourwheeler : public vehicle {
 // Factory method to create objects of different types.
 // Change is required only in this function to create a new object type
 vehicle* vehicle::create(vehicletype type) {
-	if (type == twowheeler)
+	if (type == twoWheeler)
 		return new Twowheeler();
 	else if (type == threewheeler)
 		return new Threewheeler();
